@@ -7,6 +7,7 @@
 #define MERCURY_BOARD_CHECK_ADDR2  (0xECC080)
 
 #define MERCURY_DATA_PORT          (0xECC080)
+#define MERCURY_V4_PORT            (0xECC090)
 #define MERCURY_COMMAND_PORT       (0xECC091)
 #define MERCURY_STATUS_PORT        (0xECC0A1)
 
@@ -40,9 +41,12 @@ static int16_t mercury_get_unit_version() {
 //
 //  enable mercury unit v4 
 //
+#define STR(s) #s
+#define XSTR(s) STR(s)
 static void mercury_v4_enable() {
+
   asm volatile (
-    "ori.b #0x03, 0x00ecc090"
+    "ori.b #0x03," XSTR(MERCURY_V4_PORT)
     :                          // no output
     :                          // no input
     : "memory"                 // memory status change
