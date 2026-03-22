@@ -42,12 +42,16 @@ static int16_t mercury_get_unit_version() {
 //  enable mercury unit v4 
 //
 static void mercury_v4_enable() {
+  int32_t usp = B_SUPER(0);
   asm volatile (
     "ori.b #0x03, %0"
     :
     : "m" (*(volatile uint8_t*)MERCURY_V4_PORT)
     : "memory"
   );
+  if (usp > 0) {
+    B_SUPER(usp);
+  }
 }
 
 //
@@ -66,7 +70,6 @@ int32_t main(int32_t argc, uint8_t* argv[]) {
         goto exit;
     }
 
-    SUPER(0);
     mercury_v4_enable();
     printf("Enabled Mercury-UNIT version 4.0.\n");
 
