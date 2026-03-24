@@ -75,7 +75,7 @@ int32_t main(int32_t argc, uint8_t* argv[]) {
     } else if (mu_version == 40) {
         printf("Mercury-UNIT version: 4.0\n");
         mercury_v4_enable();
-        printf("Enabled Mercury-UNIT.\n");
+        printf("Enabled Mercury-UNIT operation.\n");
     }
 
     rc = 0;
