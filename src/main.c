@@ -41,6 +41,8 @@ static int16_t mercury_get_unit_version() {
 //
 //  enable mercury unit v4 
 //
+#pragma GCC push_options
+#pragma GCC optimize("-fno-defer-pop")
 static void mercury_v4_enable() {
   int32_t usp = B_SUPER(0);
   asm volatile (
@@ -53,6 +55,7 @@ static void mercury_v4_enable() {
     B_SUPER(usp);
   }
 }
+#pragma GCC pop_options
 
 //
 //  main
@@ -65,13 +68,15 @@ int32_t main(int32_t argc, uint8_t* argv[]) {
     if (mu_version == 0) {
         printf("Mercury-UNIT is not installed.\n");
         goto exit;
-    } else if (mu_version < 40) {
-        printf("Mercury-UNIT version is not 4.0.\n");
-        goto exit;
+    } else if (mu_version < 35) {
+        printf("Mercury-UNIT version: 2.0/3.0\n");
+    } else if (mu_version == 35) {
+        printf("Mercury-UNIT version: 3.5\n");
+    } else if (mu_version == 40) {
+        printf("Mercury-UNIT version: 4.0\n");
+        mercury_v4_enable();
+        printf("Enabled Mercury-UNIT.\n");
     }
-
-    mercury_v4_enable();
-    printf("Enabled Mercury-UNIT version 4.0.\n");
 
     rc = 0;
 

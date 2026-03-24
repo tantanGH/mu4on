@@ -3,7 +3,7 @@ VERSION = 010
 
 # elf2x68k インストールパス
 ifndef ELF2X68K_DIR
-	ELF2X68K_DIR=/opt/homebrew/Cellar/elf2x68k/20251124
+	ELF2X68K_DIR=/opt/homebrew/Cellar/elf2x68k/20260301
 endif
 
 # デフォルトサフィックスを削除
@@ -31,7 +31,7 @@ INCLUDE_FLAGS = -I${ELF2X68K_DIR}/lib/gcc/m68k-elf/13.4.0/include \
 
 # コンパイルフラグ
 COMMON_FLAGS = -m68000 -O2 -msoft-float -specs=nano.specs $(INCLUDE_FLAGS)
-CFLAGS = $(COMMON_FLAGS) -fno-defer-pop
+CFLAGS = $(COMMON_FLAGS)
 
 # *.c ソースファイル
 C_SRCS = main.c
